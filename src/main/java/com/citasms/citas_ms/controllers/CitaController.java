@@ -5,6 +5,7 @@ import com.citasms.citas_ms.repositories.CitaRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -42,5 +43,22 @@ public class CitaController {
         // Esto si actualiza la base de datos
         return  repository.save(old_cita);
     }
+
+    @GetMapping("/citas/{profesionalId}")
+    List<Cita> getCitasByProfesionalId(@PathVariable String profesionalId){
+        List<Cita> citasProfesional = repository.getByProfesionalId(profesionalId);
+        return citasProfesional;
+    }
+
+//    @GetMapping("/transactions/{usernameOrigin}")
+//    List<Transaction> getTransactionByUsernameOrigin(@PathVariable String usernameOrigin){
+//        List<Transaction> transactionsOrigin =
+//                transactionRepository.getByUsernameOrigin(usernameOrigin);
+//        List<Transaction> transactionsDestinity =
+//                transactionRepository.getByUsernameDestiny(usernameOrigin);
+//        List<Transaction> transactions = Stream.concat(transactionsOrigin.stream(),
+//                transactionsDestinity.stream()).collect(Collectors.toList());
+//        return transactions;
+//    }
 
 }
